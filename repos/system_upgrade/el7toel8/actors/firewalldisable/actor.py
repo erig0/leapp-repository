@@ -8,7 +8,7 @@ from leapp.tags import IPUWorkflowTag, ApplicationsPhaseTag
 
 class FirewallDisable(Actor):
     """
-    Stops and Disable FirewallD and/or IPTables.
+    Stop and Disable FirewallD and/or IPTables.
 
     FirewallD and/or IPTables are services not supported during Upgrade process and they need to be
     stopped and disabled, so the daemons are not started after boot into Leapp provided initramfs.

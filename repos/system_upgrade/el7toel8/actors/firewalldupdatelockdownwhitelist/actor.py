@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ElementTree
 
 class FirewalldUpdateLockdownWhitelist(Actor):
     """
-    Updates the firewalld Lockdown Whitelist.
+    Update the firewalld Lockdown Whitelist.
 
     RHEL-8 uses a platform specific python interpreter for packaged
     applications. For firewall-config, the interpreter path is part of the

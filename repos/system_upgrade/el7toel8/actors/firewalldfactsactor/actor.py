@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ElementTree
 
 class FirewalldFactsActor(Actor):
     """
-    Provides data about firewalld
+    Provide data about firewalld
 
     After collecting data, a message with relevant data will be produced.
     """
