@@ -9,19 +9,23 @@ class FirewalldGlobalConfig(Model):
     """
     topic = SystemInfoTopic
 
-    # Defaults for RHEL-9.
+    # Defaults for RHEL-10.
     #
     defaultzone = fields.String(default='public')
     cleanuponexit = fields.Boolean(default=True)
     cleanupmodulesonexit = fields.Boolean(default=False)
-    lockdown = fields.Boolean(default=False)
     ipv6_rpfilter = fields.Boolean(default=True)
     individualcalls = fields.Boolean(default=False)
     logdenied = fields.String(default='off')
     firewallbackend = fields.String(default='nftables')
     flushallonreload = fields.Boolean(default=True)
+    reloadpolicy = fields.String(default='INPUT:DROP,FORWARD:DROP,OUTPUT:DROP')
     rfc3964_ipv4 = fields.Boolean(default=True)
+    nftablesflowtable = fields.Boolean(default=False)
+    nftablescounters = fields.Boolean(default=False)
+    nftablestableowner = fields.Boolean(default=False)
 
-    # These have been removed in RHEL-9.
+    # These have been removed in RHEL-10.
     #
     allowzonedrifting = fields.Boolean(default=False)
+    lockdown = fields.Boolean(default=False)
