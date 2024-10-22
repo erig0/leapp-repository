@@ -1,31 +1,23 @@
-import os
-
 from leapp.models import FirewalldGlobalConfig
+
+try:
+    from firewall.core.fw import Firewall
+except ImportError:
+    pass
 
 
 def read_config():
-    default_conf = FirewalldGlobalConfig()
+    try:
+        fw = Firewall(offline=True)
+    except NameError:
+        # import failure missing means firewalld is not installed. Just return
+        # the defaults.
+        return FirewalldGlobalConfig()
 
-    path = '/etc/firewalld/firewalld.conf'
-    if not os.path.exists(path):
-        return default_conf
+    # This does not actually start firewalld. It just loads the configuration a
+    # la firewall-offline-cmd.
+    fw.start()
 
-    conf_dict = {}
-    with open(path) as conf_file:
-        for line in conf_file:
-            (key, _unused, value) = line.partition('=')
-            if not value:
-                continue
+    conf = fw.config.get_firewalld_conf()
 
-            value = value.lower().strip()
-            if value in ['yes', 'true']:
-                value = True
-            if value in ['no', 'false']:
-                value = False
-
-            # Only worry about config used by our Model
-            key = key.lower().strip()
-            if hasattr(default_conf, key):
-                conf_dict[key] = value
-
-    return FirewalldGlobalConfig(**conf_dict)
+    return FirewalldGlobalConfig(FIXME)
